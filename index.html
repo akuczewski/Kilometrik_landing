@@ -4,14 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kilometrik | Automatyczna kilometrówka dla firm</title>
+    <title>Kilometrik | Automatyczna kilometrówka dla Twojej firmy</title>
     <meta name="description"
-        content="Kilometrik to aplikacja do automatycznego śledzenia przebiegu (kilometrówki) dla freelancerów i małych firm w Polsce. Prosto, cicho i zgodnie z przepisami.">
+        content="Kilometrik - cicha i automatyczna kilometrówka dla firm. Rejestruj trasy w tle, generuj raporty zgodne z US i oszczędzaj czas. Wypróbuj za darmo!">
+    <meta name="keywords"
+        content="kilometrówka, ewidencja przebiegu pojazdu, automatyczna kilometrówka, rozliczanie tras, raporty dla urzędu skarbowego">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kilometrik.pl/">
+    <meta property="og:title" content="Kilometrik | Automatyczna kilometrówka dla Twojej firmy">
+    <meta property="og:description"
+        content="Automatyczne śledzenie tras w tle. Generuj raporty zgodne z US jednym kliknięciem.">
+    <meta property="og:image" content="https://kilometrik.pl/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kilometrik.pl/">
+    <meta property="twitter:title" content="Kilometrik | Automatyczna kilometrówka dla Twojej firmy">
+    <meta property="twitter:description"
+        content="Automatyczne śledzenie tras w tle. Generuj raporty zgodne z US jednym kliknięciem.">
+    <meta property="twitter:image" content="https://kilometrik.pl/og-image.png">
+
+    <link rel="canonical" href="https://kilometrik.pl/">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.umd.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
@@ -71,6 +93,91 @@
             z-index: -1;
             background: radial-gradient(circle at 50% -20%, #111827 0%, #030712 100%);
         }
+
+
+        /* Modal Styles */
+        #legalModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        #legalModal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: #111827;
+            border: 1px solid #1E293B;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            border-radius: 24px;
+            overflow-y: auto;
+            position: relative;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: #1E293B;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            margin-bottom: -32px;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #A2B089;
+            color: #030712;
+        }
+
+        .modal-body h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            letter-spacing: -0.05em;
+        }
+
+        .modal-body h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #A2B089;
+        }
+
+        .modal-body p,
+        .modal-body li {
+            color: #9CA3AF;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-body ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 
@@ -78,8 +185,8 @@
     <div class="bg-mesh"></div>
     <nav id="mainNav">
         <div class="container">
-            <a href="#" class="logo">
-                <img src="logo.png" alt="Kilometrik Logo" class="h-8 w-auto">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logo.png" alt="Kilometrik Logo" class="h-8 w-auto" width="32" height="32">
                 Kilometrik
             </a>
             <div class="nav-links">
@@ -114,19 +221,22 @@
                         <!-- Left Side Screen -->
                         <div class="col-span-4 rotate-[-10deg] translate-x-12 opacity-40 blur-sm hidden lg:block">
                             <div class="screen-container">
-                                <img src="screen_reports.png" class="screen-img">
+                                <img src="assets/img/screen_reports.png" class="screen-img" alt="Raporty Kilometrik"
+                                    width="320" height="640" loading="lazy">
                             </div>
                         </div>
                         <!-- Center Screen (Main) -->
                         <div class="col-span-12 lg:col-span-4 z-10 lg:scale-110">
                             <div class="screen-container border-green-500/20 shadow-green-500/10">
-                                <img src="screen_trips.png" class="screen-img">
+                                <img src="assets/img/screen_trips.png" class="screen-img" alt="Główny widok tras"
+                                    width="320" height="640">
                             </div>
                         </div>
                         <!-- Right Side Screen -->
                         <div class="col-span-4 rotate-[10deg] -translate-x-12 opacity-40 blur-sm hidden lg:block">
                             <div class="screen-container">
-                                <img src="screen_fleet.png" class="screen-img">
+                                <img src="assets/img/screen_fleet.png" class="screen-img" alt="Zarządzanie flotą"
+                                    width="320" height="640" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -153,7 +263,8 @@
                         </div>
                         <div class="lg:w-1/2 relative">
                             <div class="screen-container rotate-3 hover:rotate-0 transition-transform duration-500">
-                                <img src="screen_trips.png" class="screen-img" alt="Tracking">
+                                <img src="assets/img/screen_trips.png" class="screen-img"
+                                    alt="Automatyczne wykrywanie podróży" width="320" height="640" loading="lazy">
                             </div>
                             <div
                                 class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-green-500/5 blur-[100px] rounded-full">
@@ -172,7 +283,8 @@
                         </div>
                         <div class="lg:w-1/2 relative">
                             <div class="screen-container -rotate-3 hover:rotate-0 transition-transform duration-500">
-                                <img src="screen_fleet.png" class="screen-img" alt="Fleet Management">
+                                <img src="assets/img/screen_fleet.png" class="screen-img" alt="Panel Twoja Flota"
+                                    width="320" height="640" loading="lazy">
                             </div>
                             <div
                                 class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/5 blur-[100px] rounded-full">
@@ -191,7 +303,8 @@
                         </div>
                         <div class="lg:w-1/2 relative">
                             <div class="screen-container rotate-2 hover:rotate-0 transition-transform duration-500">
-                                <img src="screen_reports.png" class="screen-img" alt="Reports">
+                                <img src="assets/img/screen_reports.png" class="screen-img" alt="Eksport raportów PDF"
+                                    width="320" height="640" loading="lazy">
                             </div>
                             <div
                                 class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-500/5 blur-[100px] rounded-full">
@@ -375,7 +488,9 @@
                             <!-- Premium Document Container -->
                             <div
                                 class="bg-white p-3 rounded-xl shadow-2xl transform rotate-2 group-hover:rotate-0 transition-transform duration-700 overflow-hidden max-w-[300px] mx-auto border-8 border-slate-800/10">
-                                <img src="report_sample.jpg" alt="Generated Report" class="w-full h-auto shadow-inner">
+                                <img src="assets/img/report_sample.jpg"
+                                    alt="Widok wygenerowanej ewidencji przebiegu pojazdu"
+                                    class="w-full h-auto shadow-inner" width="300" height="424" loading="lazy">
                             </div>
                             <!-- Background Glow -->
                             <div
@@ -395,8 +510,10 @@
                 <a href="#" class="btn btn-primary" data-i18n="nav_try_free">Wypróbuj za darmo</a>
             </div>
             <div class="flex flex-wrap justify-center gap-10 mb-10 opacity-60">
-                <a href="terms.html" class="hover:text-white" data-i18n="footer_terms">Regulamin</a>
-                <a href="privacy.html" class="hover:text-white" data-i18n="footer_privacy">Polityka prywatności</a>
+                <a href="javascript:void(0)" onclick="openModal('terms')" class="hover:text-white"
+                    data-i18n="footer_terms">Regulamin</a>
+                <a href="javascript:void(0)" onclick="openModal('privacy')" class="hover:text-white"
+                    data-i18n="footer_privacy">Polityka prywatności</a>
             </div>
             <p class="text-sm opacity-40" data-i18n="footer_copy">© 2026 Kilometrik. Wszelkie prawa zastrzeżone.</p>
             <p class="text-xs opacity-30 mt-4">
@@ -406,6 +523,16 @@
             </p>
         </div>
     </footer>
+
+    <!-- Legal Modal -->
+    <div id="legalModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">✕</span>
+            <div id="modalBody" class="modal-body">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
 
     <script>
         const translations = {
@@ -454,7 +581,61 @@
                 footer_copy: "© 2026 Kilometrik. Wszelkie prawa zastrzeżone.",
                 footer_terms: "Regulamin",
                 footer_privacy: "Polityka prywatności",
-                footer_powered: "Strona stworzona przez"
+                footer_powered: "Strona stworzona przez",
+                terms_html: `
+                    <h1>Regulamin świadczenia usług</h1>
+                    <div class="space-y-6 text-slate-300">
+                        <section>
+                            <h2>1. Postanowienia ogólne</h2>
+                            <p>Niniejszy regulamin określa zasady korzystania z aplikacji Kilometrik, której właścicielem jest GreatSkill Arkadiusz Kuczewski, NIP: 7182147987.</p>
+                        </section>
+                        <section>
+                            <h2>2. Rodzaj usług</h2>
+                            <p>Kilometrik świadczy usługi drogą elektroniczną polegające na automatycznym i ręcznym ewidencjonowaniu przebiegu pojazdów na potrzeby rozliczeń podatkowych.</p>
+                        </section>
+                        <section>
+                            <h2>3. Subskrypcja i Płatności</h2>
+                            <ul>
+                                <li>Wersja Darmowa: Pozwala na ewidencję do 10 tras miesięcznie dla jednego pojazdu.</li>
+                                <li>Wersja PRO: Nielimitowana liczba tras i pojazdów, dostępna w modelu subskrypcyjnym (25 zł/mies.).</li>
+                                <li>Okres próbny: Użytkownik ma prawo do 30-dniowego bezpłatnego testu wersji PRO.</li>
+                            </ul>
+                        </section>
+                        <section>
+                            <h2>4. Odpowiedzialność</h2>
+                            <p>Usługodawca dokłada wszelkich starań, aby generowane raporty były zgodne z aktualnymi przepisami, jednak ostateczna weryfikacja poprawności danych przedłożonych organom podatkowym spoczywa na Użytkowniku.</p>
+                        </section>
+                        <section>
+                            <h2>5. Dane Kontaktowe</h2>
+                            <p>Wszelkie pytania i reklamacje należy kierować pod adres e-mail: kontakt@greatskill.pl</p>
+                        </section>
+                    </div>
+                `,
+                privacy_html: `
+                    <h1>Polityka Prywatności</h1>
+                    <div class="space-y-6 text-slate-300">
+                        <section>
+                            <h2>1. Administrator Danych</h2>
+                            <p>Administratorem Twoich danych osobowych jest GreatSkill Arkadiusz Kuczewski, NIP: 7182147987. Kontakt: kontakt@greatskill.pl</p>
+                        </section>
+                        <section>
+                            <h2>2. Zakres zbieranych danych</h2>
+                            <p>W celu świadczenia usług ewidencji tras, aplikacja Kilometrik zbiera dane o lokalizacji GPS (również w tle), dane o czasie trwania podróży oraz parametry pojazdu podane przez Użytkownika.</p>
+                        </section>
+                        <section>
+                            <h2>3. Cel przetwarzania</h2>
+                            <p>Dane są przetwarzane wyłącznie w celu automatycznego wykrywania tras, generowania raportów oraz obsługi subskrypcji.</p>
+                        </section>
+                        <section>
+                            <h2>4. Bezpieczeństwo</h2>
+                            <p>Stosujemy nowoczesne standardy szyfrowania danych i nie udostępniamy Twoich danych lokalizacyjnych osobom trzecim bez Twojej wyraźnej zgody.</p>
+                        </section>
+                        <section>
+                            <h2>5. Twoje prawa</h2>
+                            <p>Zgodnie z RODO, masz prawo do wglądu w swoje dane, ich poprawiania, usunięcia oraz przeniesienia.</p>
+                        </section>
+                    </div>
+                `
             },
             en: {
                 nav_try_free: "Try for free",
@@ -501,7 +682,61 @@
                 footer_copy: "© 2026 Kilometrik. All rights reserved.",
                 footer_terms: "Terms of Service",
                 footer_privacy: "Privacy Policy",
-                footer_powered: "Powered by"
+                footer_powered: "Powered by",
+                terms_html: `
+                    <h1>Terms of Service</h1>
+                    <div class="space-y-6 text-slate-300">
+                        <section>
+                            <h2>1. General Provisions</h2>
+                            <p>These terms define the rules for using the Kilometrik application, owned by GreatSkill Arkadiusz Kuczewski, NIP: 7182147987.</p>
+                        </section>
+                        <section>
+                            <h2>2. Type of Services</h2>
+                            <p>Kilometrik provides electronic services consisting of automatic and manual recording of vehicle mileage for tax settlement purposes.</p>
+                        </section>
+                        <section>
+                            <h2>3. Subscription and Payments</h2>
+                            <ul>
+                                <li>Free Version: Allows recording up to 10 trips per month for one vehicle.</li>
+                                <li>PRO Version: Unlimited trips and vehicles, available in a subscription model (25 PLN/month).</li>
+                                <li>Trial Period: The user has the right to a 30-day free trial of the PRO version.</li>
+                            </ul>
+                        </section>
+                        <section>
+                            <h2>4. Liability</h2>
+                            <p>The Service Provider makes every effort to ensure that generated reports comply with current regulations, but ultimate verification of data submitted to tax authorities rests with the User.</p>
+                        </section>
+                        <section>
+                            <h2>5. Contact Data</h2>
+                            <p>Any questions or complaints should be directed to the e-mail address: kontakt@greatskill.pl</p>
+                        </section>
+                    </div>
+                `,
+                privacy_html: `
+                    <h1>Privacy Policy</h1>
+                    <div class="space-y-6 text-slate-300">
+                        <section>
+                            <h2>1. Data Administrator</h2>
+                            <p>The administrator of your personal data is GreatSkill Arkadiusz Kuczewski, NIP: 7182147987. Contact: kontakt@greatskill.pl</p>
+                        </section>
+                        <section>
+                            <h2>2. Scope of Collected Data</h2>
+                            <p>To provide mileage tracking services, Kilometrik collects GPS location data (also in the background), trip duration data, and vehicle parameters provided by the User.</p>
+                        </section>
+                        <section>
+                            <h2>3. Purpose of Processing</h2>
+                            <p>Data is processed solely for automatic trip detection, generating reports, and handling subscriptions.</p>
+                        </section>
+                        <section>
+                            <h2>4. Security</h2>
+                            <p>We use modern data encryption standards and do not share your location data with third parties without your express consent.</p>
+                        </section>
+                        <section>
+                            <h2>5. Your Rights</h2>
+                            <p>According to GDPR, you have the right to access, correct, delete, and transfer your data.</p>
+                        </section>
+                    </div>
+                `
             }
         };
 
@@ -578,6 +813,29 @@
         const defaultLang = savedLang || (translations[browserLang] ? browserLang : 'pl');
 
         updateContent(defaultLang);
+
+        // Modal Logic
+        const legalModal = document.getElementById('legalModal');
+        const modalBody = document.getElementById('modalBody');
+
+        async function openModal(doc) {
+            const lang = document.documentElement.lang;
+            const content = translations[lang][doc + '_html'];
+
+            modalBody.innerHTML = content;
+            legalModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            legalModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on backdrop click
+        legalModal.addEventListener('click', (e) => {
+            if (e.target === legalModal) closeModal();
+        });
 
         // Initialize AOS
         AOS.init({
