@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kilometrik | Automatyczna kilometrówka dla firm</title>
+    <meta name="description"
+        content="Kilometrik to aplikacja do automatycznego śledzenia przebiegu (kilometrówki) dla freelancerów i małych firm w Polsce. Prosto, cicho i zgodnie z przepisami.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        [data-i18n] {
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-out {
+            opacity: 0;
+            filter: blur(10px);
+        }
+
+        /* App Screen Crop Logic */
+        .screen-container {
+            max-width: 320px;
+            margin: 0 auto;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 8px solid #1E293B;
+            background: #030712;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+
+        .screen-img {
+            width: 100%;
+            margin-top: -48px;
+            /* Crop status bar */
+            display: block;
+        }
+
+        /* Mobile specific adjustments for app screens */
+        @media (max-width: 768px) {
+            .screen-container {
+                max-width: 240px;
+                border-width: 6px;
+                border-radius: 32px;
+            }
+
+            .screen-img {
+                margin-top: -36px;
+            }
+        }
+
+        /* Premium Background Gradient */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 50% -20%, #111827 0%, #030712 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-mesh"></div>
+    <nav id="mainNav">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Kilometrik Logo" class="h-8 w-auto">
+                Kilometrik
+            </a>
+            <div class="nav-links">
+                <div class="lang-toggle" id="langToggle">
+                    <div class="lang-slider"></div>
+                    <div class="lang-option" data-lang="pl">PL</div>
+                    <div class="lang-option" data-lang="en">EN</div>
+                </div>
+                <a href="#" class="btn btn-primary" data-i18n="nav_try_free">Wypróbuj za darmo</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero min-h-screen flex flex-col justify-center pt-48 pb-20">
+            <div class="container">
+                <div class="max-w-4xl mx-auto text-center mb-20" data-aos="fade-up">
+                    <h1 class="font-black leading-none mb-8 tracking-tighter" data-i18n="hero_title">Automatyczna
+                        kilometrówka dla Twojej firmy</h1>
+                    <p class="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl mx-auto" data-i18n="hero_subtitle">
+                        Kilometrik automatycznie zapisuje Twoje trasy w tle. Bez klikania, bez zapominania. Gotowe
+                        zestawienie dla księgowości w zasięgu ręki.</p>
+                    <div class="flex flex-wrap gap-6 justify-center">
+                        <a href="#" class="btn btn-primary text-lg px-10 py-4" data-i18n="hero_cta_primary">Wypróbuj za
+                            darmo</a>
+                    </div>
+                </div>
+
+                <div class="relative max-w-5xl mx-auto" data-aos="zoom-out-up" data-aos-duration="1500">
+                    <div class="grid grid-cols-12 gap-4 items-center">
+                        <!-- Left Side Screen -->
+                        <div class="col-span-4 rotate-[-10deg] translate-x-12 opacity-40 blur-sm hidden lg:block">
+                            <div class="screen-container">
+                                <img src="screen_reports.png" class="screen-img">
+                            </div>
+                        </div>
+                        <!-- Center Screen (Main) -->
+                        <div class="col-span-12 lg:col-span-4 z-10 lg:scale-110">
+                            <div class="screen-container border-green-500/20 shadow-green-500/10">
+                                <img src="screen_trips.png" class="screen-img">
+                            </div>
+                        </div>
+                        <!-- Right Side Screen -->
+                        <div class="col-span-4 rotate-[10deg] -translate-x-12 opacity-40 blur-sm hidden lg:block">
+                            <div class="screen-container">
+                                <img src="screen_fleet.png" class="screen-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section id="how-it-works" class="py-24 overflow-hidden">
+            <div class="container">
+                <h2 class="text-center text-5xl md:text-6xl mb-24 font-black tracking-tighter" data-aos="fade-up"
+                    data-i18n="how_it_works_title">Jak to działa?</h2>
+
+                <div class="space-y-32">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24" data-aos="fade-right">
+                        <div class="lg:w-1/2">
+                            <div class="icon-box mb-8">01</div>
+                            <h3 class="text-4xl mb-6 font-bold" data-i18n="how_step1_title">Wykrywanie tras i
+                                weryfikacja</h3>
+                            <p class="text-xl text-slate-400 leading-relaxed" data-i18n="how_step1_desc">Aplikacja
+                                działa cicho w tle i automatycznie wykrywa początek oraz koniec podróży. Jednym ruchem
+                                oznaczasz przejazd jako służbowy lub prywatny w dogodnym momencie.</p>
+                        </div>
+                        <div class="lg:w-1/2 relative">
+                            <div class="screen-container rotate-3 hover:rotate-0 transition-transform duration-500">
+                                <img src="screen_trips.png" class="screen-img" alt="Tracking">
+                            </div>
+                            <div
+                                class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-green-500/5 blur-[100px] rounded-full">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-24" data-aos="fade-left">
+                        <div class="lg:w-1/2">
+                            <div class="icon-box mb-8">02</div>
+                            <h3 class="text-4xl mb-6 font-bold" data-i18n="how_step2_title">Twoja Flota</h3>
+                            <p class="text-xl text-slate-400 leading-relaxed" data-i18n="how_step2_desc">W dedykowanej
+                                zakładce możesz w każdej chwili dodać nowy samochód lub edytować już istniejące pojazdy,
+                                przypisując im odpowiednie stawki za kilometr.</p>
+                        </div>
+                        <div class="lg:w-1/2 relative">
+                            <div class="screen-container -rotate-3 hover:rotate-0 transition-transform duration-500">
+                                <img src="screen_fleet.png" class="screen-img" alt="Fleet Management">
+                            </div>
+                            <div
+                                class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/5 blur-[100px] rounded-full">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24" data-aos="fade-up">
+                        <div class="lg:w-1/2">
+                            <div class="icon-box mb-8">03</div>
+                            <h3 class="text-4xl mb-6 font-bold" data-i18n="how_step3_title">Gotowe raporty</h3>
+                            <p class="text-xl text-slate-400 leading-relaxed" data-i18n="how_step3_desc">Kilometrik
+                                generuje kompletny dokument kilometrówki zgodny z polskimi przepisami podatkowymi. Jedno
+                                kliknięcie i gotowe dla Twojej księgowości.</p>
+                        </div>
+                        <div class="lg:w-1/2 relative">
+                            <div class="screen-container rotate-2 hover:rotate-0 transition-transform duration-500">
+                                <img src="screen_reports.png" class="screen-img" alt="Reports">
+                            </div>
+                            <div
+                                class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-500/5 blur-[100px] rounded-full">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits -->
+        <section class="benefits py-32 overflow-hidden">
+            <div class="container">
+                <h2 class="text-center text-5xl md:text-6xl mb-24 font-black tracking-tighter" data-aos="fade-up"
+                    data-i18n="benefits_title">Dlaczego Kilometrik?</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6">
+                    <!-- Benefit 1: Full Automation (Large) -->
+                    <div class="md:col-span-3 lg:col-span-7 card p-10 group hover:border-green-500/30 transition-all duration-500"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex flex-col h-full">
+                            <div
+                                class="icon-box bg-green-500/10 text-green-400 mb-8 group-hover:scale-110 transition-transform">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m12 14 4-4" />
+                                    <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+                                    <path d="M12 4v8" />
+                                </svg>
+                            </div>
+                            <h3 class="text-3xl mb-4 font-bold" data-i18n="benefit1_title">Pełna automatyzacja</h3>
+                            <p class="text-xl text-slate-400 max-w-md" data-i18n="benefit1_desc">Zapomnij o ręcznym
+                                wpisywaniu stanów licznika i adresów. Nasze inteligentne algorytmy zajmą się wszystkim
+                                za Ciebie.</p>
+                            <div class="mt-auto pt-10 opacity-20 group-hover:opacity-40 transition-opacity">
+                                <div class="flex gap-2">
+                                    <div class="h-1 w-20 bg-green-500 rounded-full"></div>
+                                    <div class="h-1 w-10 bg-green-500 rounded-full"></div>
+                                    <div class="h-1 w-5 bg-green-500 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 2: Compliance (Medium) -->
+                    <div class="md:col-span-3 lg:col-span-5 card p-10 group hover:border-blue-500/30 transition-all duration-500"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="icon-box bg-blue-500/10 text-blue-400 mb-8 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl mb-4 font-bold" data-i18n="benefit2_title">Zgodność z przepisami</h3>
+                        <p class="text-lg text-slate-400" data-i18n="benefit2_desc">Dokumenty są generowane w formacie
+                            akceptowanym przez urzędy skarbowe i biura rachunkowe w całej Europie.</p>
+                    </div>
+
+                    <!-- Benefit 3: Multiple Vehicles (Small/Medium) -->
+                    <div class="md:col-span-3 lg:col-span-5 card p-10 group hover:border-purple-500/30 transition-all duration-500"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div
+                            class="icon-box bg-purple-500/10 text-purple-400 mb-8 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h10" />
+                                <circle cx="7" cy="17" r="2" />
+                                <circle cx="17" cy="17" r="2" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl mb-4 font-bold" data-i18n="benefit3_title">Wiele pojazdów</h3>
+                        <p class="text-lg text-slate-400" data-i18n="benefit3_desc">Zarządzaj prywatną flotą lub wieloma
+                            samochodami służbowymi w ramach jednego, przejrzystego profilu.</p>
+                    </div>
+
+                    <!-- Benefit 4: Background (Large) -->
+                    <div class="md:col-span-3 lg:col-span-7 card p-10 group hover:border-orange-500/30 transition-all duration-500"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <div class="flex flex-col lg:flex-row gap-10 items-center">
+                            <div class="lg:w-2/3">
+                                <div
+                                    class="icon-box bg-orange-500/10 text-orange-400 mb-8 group-hover:scale-110 transition-transform">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-3xl mb-4 font-bold" data-i18n="benefit4_title">Działa w tle</h3>
+                                <p class="text-xl text-slate-400" data-i18n="benefit4_desc">Aplikacja nie wymaga Twojej
+                                    uwagi podczas jazdy. Oszczędza Twój czas oraz baterię Twojego smartfona.</p>
+                            </div>
+                            <div class="lg:w-1/3 flex justify-center">
+                                <div class="relative">
+                                    <div
+                                        class="w-32 h-32 rounded-full border-4 border-orange-500/20 flex items-center justify-center animate-pulse">
+                                        <div
+                                            class="w-24 h-24 rounded-full border-4 border-orange-500/40 flex items-center justify-center">
+                                            <div class="w-16 h-16 rounded-full bg-orange-500/20"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="pricing reveal">
+            <div class="container">
+                <h2 class="section-title text-center text-5xl mb-16 font-black" data-i18n="pricing_title">Proste zasady
+                </h2>
+                <div class="pricing-grid">
+                    <div class="card price-card">
+                        <h3 class="text-2xl" data-i18n="pricing_free_title">Darmowy</h3>
+                        <div class="price-value text-5xl font-black my-8" data-i18n="pricing_free_price">0 zł</div>
+                        <ul class="features-list space-y-4 mb-10" id="free-features">
+                            <!-- Populated by JS -->
+                        </ul>
+                        <a href="#" class="btn btn-secondary w-full" data-i18n="nav_try_free">Wypróbuj</a>
+                    </div>
+                    <div class="card price-card featured bg-slate-900">
+                        <h3 class="text-2xl" data-i18n="pricing_pro_title">PRO</h3>
+                        <div class="price-value text-5xl font-black my-8">
+                            <span data-i18n="pricing_pro_price">25 zł</span>
+                            <span class="text-lg font-normal text-slate-400" data-i18n="pricing_pro_period">/
+                                mies.</span>
+                        </div>
+                        <ul class="features-list space-y-4 mb-10" id="pro-features">
+                            <!-- Populated by JS -->
+                        </ul>
+                        <a href="#" class="btn btn-primary w-full" data-i18n="nav_try_free">Zacznij test 30 dni</a>
+                    </div>
+                </div>
+                <p class="pricing-note text-center mt-12 opacity-60" data-i18n="pricing_trial">30 dni okresu próbnego
+                    PRO za darmo. Bez podpinania karty.</p>
+            </div>
+        </section>
+
+
+        <!-- Trust Section -->
+        <section class="trust py-32 overflow-hidden bg-slate-900/30">
+            <div class="container">
+                <div class="flex flex-col lg:flex-row items-center gap-20">
+                    <div class="lg:w-1/2" data-aos="fade-right">
+                        <h2 class="text-5xl md:text-6xl font-black mb-8 leading-tight tracking-tighter"
+                            data-i18n="trust_title">Spokój i kontrola</h2>
+                        <p class="text-xl md:text-2xl text-slate-400 mb-10 leading-relaxed" data-i18n="trust_desc">
+                            Kilometrik został zaprojektowany z myślą o polskich realiach podatkowych. Twoje dane są
+                            bezpieczne, a dokumenty zawsze poprawne i zgodne z aktualnymi przepisami.</p>
+                        <ul class="space-y-6">
+                            <li class="flex items-center gap-4 text-lg text-slate-300">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center flex-shrink-0">
+                                    ✓</div>
+                                <span data-i18n="trust_feat1">Format akceptowany przez US</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-lg text-slate-300">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center flex-shrink-0">
+                                    ✓</div>
+                                <span data-i18n="trust_feat2">Automatyczne wyliczanie stawek</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-lg text-slate-300">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center flex-shrink-0">
+                                    ✓</div>
+                                <span data-i18n="trust_feat3">Ewidencja przebiegu pojazdu w zasięgu ręki</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2" data-aos="fade-left">
+                        <div class="relative group">
+                            <!-- Premium Document Container -->
+                            <div
+                                class="bg-white p-3 rounded-xl shadow-2xl transform rotate-2 group-hover:rotate-0 transition-transform duration-700 overflow-hidden max-w-[300px] mx-auto border-8 border-slate-800/10">
+                                <img src="report_sample.jpg" alt="Generated Report" class="w-full h-auto shadow-inner">
+                            </div>
+                            <!-- Background Glow -->
+                            <div
+                                class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-green-500/10 blur-[100px] rounded-full">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="reveal">
+        <div class="container text-center">
+            <h2 class="text-4xl font-black mb-12" data-i18n="footer_cta">Zacznij oszczędzać czas już dziś</h2>
+            <div class="flex justify-center mb-16">
+                <a href="#" class="btn btn-primary" data-i18n="nav_try_free">Wypróbuj za darmo</a>
+            </div>
+            <div class="flex flex-wrap justify-center gap-10 mb-10 opacity-60">
+                <a href="terms.html" class="hover:text-white" data-i18n="footer_terms">Regulamin</a>
+                <a href="privacy.html" class="hover:text-white" data-i18n="footer_privacy">Polityka prywatności</a>
+            </div>
+            <p class="text-sm opacity-40" data-i18n="footer_copy">© 2026 Kilometrik. Wszelkie prawa zastrzeżone.</p>
+            <p class="text-xs opacity-30 mt-4">
+                <span data-i18n="footer_powered">Powered by</span>
+                <a href="https://greatskill.pl" target="_blank"
+                    class="hover:text-white transition-colors underline decoration-slate-600 underline-offset-4">GreatSkill</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            pl: {
+                nav_try_free: "Wypróbuj za darmo",
+
+                hero_title: "Automatyczna kilometrówka dla Twojej firmy",
+                hero_subtitle: "Kilometrik automatycznie zapisuje Twoje trasy w tle. Bez klikania, bez zapominania. Gotowe zestawienie dla księgowości w zasięgu ręki.",
+                hero_cta_primary: "Wypróbuj za darmo",
+
+                how_it_works_title: "Jak to działa?",
+                how_step1_title: "Wykrywanie tras",
+                how_step1_desc: "Aplikacja działa cicho w tle i automatycznie wykrywa trasy, ale masz pełną kontrolę – w dowolnym momencie możesz ręcznie rozpocząć, zakończyć lub edytować każdy przejazd.",
+                how_step2_title: "Twoja Flota",
+                how_step2_desc: "W dedykowanej zakładce możesz w każdej chwili dodać nowy samochód lub edytować już istniejące pojazdy, przypisując im odpowiednie stawki za kilometr.",
+                how_step3_title: "Gotowe raporty",
+                how_step3_desc: "Kilometrik generuje kompletny dokument kilometrówki zgodny z polskimi przepisami podatkowymi.",
+
+                benefits_title: "Dlaczego Kilometrik?",
+                benefit1_title: "Pełna automatyzacja",
+                benefit1_desc: "Zapomnij o ręcznym wpisywaniu stanów licznika i adresów. Aplikacja robi to za Ciebie.",
+                benefit2_title: "Zgodność z przepisami",
+                benefit2_desc: "Dokumenty są generowane w formacie akceptowanym przez polskie urzędy skarbowe i biura rachunkowe.",
+                benefit3_title: "Wiele pojazdów",
+                benefit3_desc: "Zarządzaj jedną floty lub wieloma samochodami w ramach jednego konta.",
+                benefit4_title: "Działa w tle",
+                benefit4_desc: "Aplikacja nie wymaga Twojej uwagi podczas jazdy. Oszczędza czas i baterię.",
+
+                pricing_title: "Proste zasady",
+                pricing_free_title: "Darmowy",
+                pricing_free_price: "0 zł",
+                pricing_free_features: ["Do 10 tras miesięcznie", "1 pojazd", "Wszystkie funkcje raportowania"],
+                pricing_pro_title: "PRO",
+                pricing_pro_price: "25 zł",
+                pricing_pro_period: "/ mies.",
+                pricing_pro_features: ["Nielimitowane trasy", "Nielimitowane pojazdy", "Priorytetowe wsparcie", "Eksport zbiorczy"],
+                pricing_trial: "30 dni okresu próbnego PRO za darmo. Bez podpinania karty.",
+
+                trust_title: "Spokój i kontrola",
+                trust_desc: "Kilometrik został zaprojektowany z myślą o polskich realiach podatkowych. Twoje dane są bezpieczne, a dokumenty zawsze poprawne i zgodne z aktualnymi przepisami.",
+                trust_feat1: "Format akceptowany przez US",
+                trust_feat2: "Automatyczne wyliczanie stawek",
+                trust_feat3: "Ewidencja przebiegu pojazdu w zasięgu ręki",
+
+                footer_cta: "Zacznij oszczędzać czas już dziś",
+                footer_copy: "© 2026 Kilometrik. Wszelkie prawa zastrzeżone.",
+                footer_terms: "Regulamin",
+                footer_privacy: "Polityka prywatności",
+                footer_powered: "Strona stworzona przez"
+            },
+            en: {
+                nav_try_free: "Try for free",
+
+                hero_title: "Automatic Mileage Tracking for Your Business",
+                hero_subtitle: "Kilometrik automatically logs your trips in the background. No clicking, no forgetting. Ready-to-use reports for accounting at your fingertips.",
+                hero_cta_primary: "Try for free",
+
+                how_it_works_title: "How it works?",
+                how_step1_title: "Trip detection",
+                how_step1_desc: "The app runs quietly in the background and automatically detects trips, but you have full control – manually start, stop, or edit any journey at any time.",
+                how_step2_title: "Your Fleet",
+                how_step2_desc: "In the dedicated tab, you can add new cars or edit existing vehicles at any time, assigning them appropriate mileage rates.",
+                how_step3_title: "Ready reports",
+                how_step3_desc: "Kilometrik generates complete mileage logs compliant with European law and tax regulations. One click and it's ready for your accounting.",
+
+                benefits_title: "Why Kilometrik?",
+                benefit1_title: "Full automation",
+                benefit1_desc: "Forget manual odometer readings and addresses. The app does it all for you.",
+                benefit2_title: "Tax compliance",
+                benefit2_desc: "Documents are generated in a format compliant with European law, accepted by tax authorities and accounting offices.",
+                benefit3_title: "Multiple vehicles",
+                benefit3_desc: "Manage one car or a whole fleet within a single account.",
+                benefit4_title: "Background operation",
+                benefit4_desc: "The app doesn't require your attention while driving. Saves time and battery.",
+
+                pricing_title: "Simple Pricing",
+                pricing_free_title: "Free",
+                pricing_free_price: "$0",
+                pricing_free_features: ["Up to 10 trips/month", "1 vehicle", "Full reporting features"],
+                pricing_pro_title: "PRO",
+                pricing_pro_price: "25 PLN",
+                pricing_pro_period: "/ mo.",
+                pricing_pro_features: ["Unlimited trips", "Unlimited vehicles", "Priority support", "Bulk export"],
+                pricing_trial: "30-day PRO trial for free. No credit card required.",
+
+                trust_title: "Trust & Control",
+                trust_desc: "Kilometrik is designed for European law and tax compliance. Your data is secure, and your documents are always correct and compliant with current regulations.",
+                trust_feat1: "Format accepted by tax authorities",
+                trust_feat2: "Automatic rate calculation",
+                trust_feat3: "Vehicle mileage logs at your fingertips",
+
+                footer_cta: "Start saving time today",
+                footer_copy: "© 2026 Kilometrik. All rights reserved.",
+                footer_terms: "Terms of Service",
+                footer_privacy: "Privacy Policy",
+                footer_powered: "Powered by"
+            }
+        };
+
+        const langToggle = document.getElementById('langToggle');
+        const langOptions = document.querySelectorAll('.lang-option');
+        const mainNav = document.getElementById('mainNav');
+
+        // Sticky Nav Logic
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                mainNav.classList.add('scrolled');
+            } else {
+                mainNav.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for Reveal
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function updateContent(lang) {
+            document.body.classList.add('fade-out');
+
+            setTimeout(() => {
+                const t = translations[lang];
+
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (t[key]) el.textContent = t[key];
+                });
+
+                updateList('free-features', t.pricing_free_features);
+                updateList('pro-features', t.pricing_pro_features);
+
+                langToggle.className = `lang-toggle ${lang}`;
+                langOptions.forEach(opt => {
+                    opt.classList.toggle('active', opt.dataset.lang === lang);
+                });
+
+                document.documentElement.lang = lang;
+                document.body.classList.remove('fade-out');
+            }, 200);
+        }
+
+        function updateList(id, items) {
+            const list = document.getElementById(id);
+            if (!list) return;
+            list.innerHTML = '';
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = "flex items-center gap-3";
+                li.innerHTML = `<span class="text-green-400">✓</span> ${item}`;
+                list.appendChild(li);
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            const currentLang = document.documentElement.lang;
+            const newLang = currentLang === 'pl' ? 'en' : 'pl';
+            updateContent(newLang);
+            localStorage.setItem('preferredLang', newLang);
+        });
+
+        const savedLang = localStorage.getItem('preferredLang');
+        const browserLang = navigator.language.split('-')[0];
+        const defaultLang = savedLang || (translations[browserLang] ? browserLang : 'pl');
+
+        updateContent(defaultLang);
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-expo'
+        });
+    </script>
+</body>
+
+</html>
