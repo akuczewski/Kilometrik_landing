@@ -783,7 +783,8 @@
                 updateList('pro-features', t.pricing_pro_features);
 
                 langToggles.forEach(toggle => {
-                    toggle.className = `lang-toggle ${lang} ${toggle.classList.contains('footer-lang-toggle') ? 'footer-lang-toggle' : ''}`;
+                    toggle.classList.remove('pl', 'en');
+                    toggle.classList.add(lang);
                 });
 
                 langOptions.forEach(opt => {
