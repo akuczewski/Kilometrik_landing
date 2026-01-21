@@ -511,6 +511,13 @@
                 <a href="javascript:void(0)" onclick="openModal('privacy')" class="hover:text-white"
                     data-i18n="footer_privacy">Polityka prywatności</a>
             </div>
+            <div class="flex justify-center mb-10 lg:hidden">
+                <div class="lang-toggle footer-lang-toggle">
+                    <div class="lang-slider"></div>
+                    <div class="lang-option" data-lang="pl">PL</div>
+                    <div class="lang-option" data-lang="en">EN</div>
+                </div>
+            </div>
             <p class="text-sm opacity-40" data-i18n="footer_copy">© 2026 Kilometrik. Wszelkie prawa zastrzeżone.</p>
             <p class="text-xs opacity-30 mt-4">
                 <span data-i18n="footer_powered">Powered by</span>
@@ -736,7 +743,7 @@
             }
         };
 
-        const langToggle = document.getElementById('langToggle');
+        const langToggles = document.querySelectorAll('.lang-toggle');
         const langOptions = document.querySelectorAll('.lang-option');
         const mainNav = document.getElementById('mainNav');
 
@@ -775,7 +782,10 @@
                 updateList('free-features', t.pricing_free_features);
                 updateList('pro-features', t.pricing_pro_features);
 
-                langToggle.className = `lang-toggle ${lang}`;
+                langToggles.forEach(toggle => {
+                    toggle.className = `lang-toggle ${lang} ${toggle.classList.contains('footer-lang-toggle') ? 'footer-lang-toggle' : ''}`;
+                });
+
                 langOptions.forEach(opt => {
                     opt.classList.toggle('active', opt.dataset.lang === lang);
                 });
@@ -797,11 +807,13 @@
             });
         }
 
-        langToggle.addEventListener('click', () => {
-            const currentLang = document.documentElement.lang;
-            const newLang = currentLang === 'pl' ? 'en' : 'pl';
-            updateContent(newLang);
-            localStorage.setItem('preferredLang', newLang);
+        langToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const currentLang = document.documentElement.lang;
+                const newLang = currentLang === 'pl' ? 'en' : 'pl';
+                updateContent(newLang);
+                localStorage.setItem('preferredLang', newLang);
+            });
         });
 
         const savedLang = localStorage.getItem('preferredLang');

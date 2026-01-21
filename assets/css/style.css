@@ -357,7 +357,13 @@ footer {
     }
 
     .logo-text {
+        display: block;
+        /* Restore text visibility */
+    }
+
+    #mainNav .lang-toggle {
         display: none;
+        /* Hide toggle in navbar */
     }
 
     .logo img {
