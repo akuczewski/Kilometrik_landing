@@ -939,10 +939,14 @@
 
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Apps Script requires no-cors for simple posts
+                    mode: 'no-cors',
                     cache: 'no-cache',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email })
+                    body: JSON.stringify({
+                        email: email,
+                        source: 'Beta Signup',
+                        timestamp: new Date().toISOString()
+                    })
                 });
 
                 formStatus.textContent = translations[lang].form_success;
