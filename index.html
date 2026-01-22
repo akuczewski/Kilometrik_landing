@@ -913,11 +913,14 @@
         const betaForm = document.getElementById('betaForm');
         const formStatus = document.getElementById('formStatus');
 
-        showBetaFormBtn.addEventListener('click', () => {
+        const revealForm = () => {
             showBetaFormBtn.classList.add('hidden');
             betaForm.classList.remove('hidden');
             betaForm.classList.add('animate-fadeIn');
-        });
+        };
+
+        showBetaFormBtn.addEventListener('mouseenter', revealForm);
+        showBetaFormBtn.addEventListener('click', revealForm);
 
         betaForm.addEventListener('submit', (e) => {
             e.preventDefault();
