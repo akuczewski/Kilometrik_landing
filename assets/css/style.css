@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --bg-color: #030712;
     --card-bg: rgba(17, 24, 39, 0.7);
@@ -410,4 +414,18 @@ footer {
         padding: 0.5rem 0.75rem;
         font-size: 0.75rem;
     }
+}
+/* Form Animations & Styles */
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+input::placeholder {
+    color: #4B5563;
 }

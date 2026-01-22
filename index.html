@@ -191,7 +191,7 @@
                     <div class="lang-option" data-lang="pl">PL</div>
                     <div class="lang-option" data-lang="en">EN</div>
                 </div>
-                <a href="#" class="btn btn-primary" data-i18n="nav_try_free">Wypróbuj za darmo</a>
+                <a href="#beta-section" class="btn btn-primary" data-i18n="nav_try_free">Przetestuj</a>
             </div>
         </div>
     </nav>
@@ -207,8 +207,8 @@
                         Kilometrik automatycznie zapisuje Twoje trasy w tle. Bez klikania, bez zapominania. Gotowe
                         zestawienie dla księgowości w zasięgu ręki.</p>
                     <div class="flex flex-wrap gap-6 justify-center">
-                        <a href="#" class="btn btn-primary text-lg px-10 py-4" data-i18n="hero_cta_primary">Wypróbuj za
-                            darmo</a>
+                        <a href="#beta-section" class="btn btn-primary text-lg px-10 py-4"
+                            data-i18n="hero_cta_primary">Przetestuj</a>
                     </div>
                 </div>
 
@@ -499,11 +499,58 @@
         </section>
     </main>
 
-    <footer class="reveal">
+    <footer id="beta-section" class="reveal">
         <div class="container text-center">
-            <h2 class="text-4xl font-black mb-12" data-i18n="footer_cta">Zacznij oszczędzać czas już dziś</h2>
-            <div class="flex justify-center mb-16">
-                <a href="#" class="btn btn-primary" data-i18n="nav_try_free">Wypróbuj za darmo</a>
+            <h2 class="text-4xl font-black mb-6" data-i18n="footer_cta">Zacznij oszczędzać czas już dziś</h2>
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-12" data-i18n="footer_beta_desc">
+                Budujemy Kilometrik od podstaw i potrzebujemy Twojej szczerej opinii. Dołącz do naszej grupy 1000
+                użytkowników, sugeruj ulepszenia i zgłaszaj błędy. W zamian otrzymasz 50% zniżki na plan PRO w dniu
+                premiery.
+            </p>
+            <div class="flex flex-col items-center max-w-lg mx-auto mb-16">
+                <!-- Initial Button -->
+                <button id="showBetaForm" class="btn btn-primary text-xl px-12 py-5" data-i18n="nav_try_free">
+                    Przetestuj
+                </button>
+
+                <!-- Hidden Subscription Form -->
+                <form id="betaForm"
+                    class="w-full space-y-6 hidden mt-4 text-left bg-slate-900/50 p-8 rounded-3xl border border-slate-800 backdrop-blur-sm">
+                    <div>
+                        <input type="email" id="testerEmail" placeholder="Twój adres e-mail" required
+                            data-i18n="form_email_placeholder"
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500/50 transition-colors">
+                    </div>
+
+                    <div class="space-y-4">
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input type="checkbox" required class="mt-1.5 accent-green-500">
+                            <span class="text-sm text-slate-400 group-hover:text-slate-300 transition-colors"
+                                data-i18n="form_consent_rodo">
+                                Wyrażam zgodę na przetwarzanie moich danych osobowych w celu dołączenia do grona
+                                użytkowników testowych aplikacji Kilometrik oraz otrzymania zniżki na plan PRO.
+                            </span>
+                        </label>
+
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input type="checkbox" required class="mt-1.5 accent-green-500">
+                            <span class="text-sm text-slate-400 group-hover:text-slate-300 transition-colors"
+                                data-i18n="form_consent_terms">
+                                Akceptuję <a href="javascript:void(0)" onclick="openModal('terms')"
+                                    class="text-green-500/80 hover:text-green-400 underline underline-offset-4">Regulamin</a>
+                                oraz <a href="javascript:void(0)" onclick="openModal('privacy')"
+                                    class="text-green-500/80 hover:text-green-400 underline underline-offset-4">Politykę
+                                    Prywatności</a>.
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-full py-4 text-lg" data-i18n="form_submit">
+                        Wyślij i odbierz zniżkę
+                    </button>
+
+                    <p id="formStatus" class="text-center text-sm hidden text-green-400"></p>
+                </form>
             </div>
             <div class="flex flex-wrap justify-center gap-10 mb-10 opacity-60">
                 <a href="javascript:void(0)" onclick="openModal('terms')" class="hover:text-white"
@@ -540,11 +587,11 @@
     <script>
         const translations = {
             pl: {
-                nav_try_free: "Wypróbuj za darmo",
+                nav_try_free: "Przetestuj",
 
                 hero_title: "Automatyczna kilometrówka dla Twojej firmy",
                 hero_subtitle: "Kilometrik automatycznie zapisuje Twoje trasy w tle. Bez klikania, bez zapominania. Gotowe zestawienie dla księgowości w zasięgu ręki.",
-                hero_cta_primary: "Wypróbuj za darmo",
+                hero_cta_primary: "Przetestuj",
 
                 how_it_works_title: "Jak to działa?",
                 how_step1_title: "Wykrywanie tras",
@@ -580,7 +627,13 @@
                 trust_feat2: "Automatyczne wyliczanie stawek",
                 trust_feat3: "Ewidencja przebiegu pojazdu w zasięgu ręki",
 
-                footer_cta: "Zacznij oszczędzać czas już dziś",
+                footer_cta: "Szukamy 1000 pionierów",
+                footer_beta_desc: "Budujemy Kilometrik z myślą o Tobie, dlatego potrzebujemy Twojej szczerej opinii. Dołącz do grona pierwszych 1000 użytkowników, pomóż nam wyłapać błędy i powiedz, co możemy zrobić lepiej. W podziękowaniu, w dniu oficjalnej premiery otrzymasz od nas stały rabat -50% na plan PRO.",
+                form_email_placeholder: "Twój adres e-mail",
+                form_consent_rodo: "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu dołączenia do grona użytkowników testowych aplikacji Kilometrik oraz otrzymania zniżki na plan PRO.",
+                form_consent_terms: 'Akceptuję <a href="javascript:void(0)" onclick="openModal(\'terms\')" class="text-green-500/80 hover:text-green-400 underline underline-offset-4">Regulamin</a> oraz <a href="javascript:void(0)" onclick="openModal(\'privacy\')" class="text-green-500/80 hover:text-green-400 underline underline-offset-4">Politykę Prywatności</a>.',
+                form_submit: "Wyślij i odbierz zniżkę",
+                form_success: "Dziękujemy! Sprawdź swoją skrzynkę (również folder SPAM) w ciągu kilku minut.",
                 footer_copy: "© 2026 Kilometrik. Wszelkie prawa zastrzeżone.",
                 footer_terms: "Regulamin",
                 footer_privacy: "Polityka prywatności",
@@ -641,11 +694,11 @@
                 `
             },
             en: {
-                nav_try_free: "Try for free",
+                nav_try_free: "Join the test",
 
                 hero_title: "Automatic Mileage Tracking for Your Business",
                 hero_subtitle: "Kilometrik automatically logs your trips in the background. No clicking, no forgetting. Ready-to-use reports for accounting at your fingertips.",
-                hero_cta_primary: "Try for free",
+                hero_cta_primary: "Join the test",
 
                 how_it_works_title: "How it works?",
                 how_step1_title: "Trip detection",
@@ -681,7 +734,13 @@
                 trust_feat2: "Automatic rate calculation",
                 trust_feat3: "Vehicle mileage logs at your fingertips",
 
-                footer_cta: "Start saving time today",
+                footer_cta: "Looking for 1000 pioneers",
+                footer_beta_desc: "We are building Kilometrik for you, and we need your honest feedback. Join the group of the first 1000 users, help us find bugs, and tell us what we can do better. In return, you'll receive a permanent 50% discount on the PRO plan on launch day.",
+                form_email_placeholder: "Your email address",
+                form_consent_rodo: "I agree to the processing of my personal data for the purpose of joining the Kilometrik test group and receiving a PRO plan discount.",
+                form_consent_terms: 'I accept the <a href="javascript:void(0)" onclick="openModal(\'terms\')" class="text-green-500/80 hover:text-green-400 underline underline-offset-4">Terms</a> and <a href="javascript:void(0)" onclick="openModal(\'privacy\')" class="text-green-500/80 hover:text-green-400 underline underline-offset-4">Privacy Policy</a>.',
+                form_submit: "Send and get discount",
+                form_success: "Thank you! Check your inbox (and SPAM folder) in a few minutes.",
                 footer_copy: "© 2026 Kilometrik. All rights reserved.",
                 footer_terms: "Terms of Service",
                 footer_privacy: "Privacy Policy",
@@ -776,7 +835,15 @@
 
                 document.querySelectorAll('[data-i18n]').forEach(el => {
                     const key = el.getAttribute('data-i18n');
-                    if (t[key]) el.textContent = t[key];
+                    if (t[key]) {
+                        if (el.tagName === 'INPUT' && el.placeholder !== undefined) {
+                            el.placeholder = t[key];
+                        } else if (key.includes('consent') || key.includes('desc')) {
+                            el.innerHTML = t[key];
+                        } else {
+                            el.textContent = t[key];
+                        }
+                    }
                 });
 
                 updateList('free-features', t.pricing_free_features);
@@ -840,6 +907,31 @@
             legalModal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
+
+        // Form Logic
+        const showBetaFormBtn = document.getElementById('showBetaForm');
+        const betaForm = document.getElementById('betaForm');
+        const formStatus = document.getElementById('formStatus');
+
+        showBetaFormBtn.addEventListener('click', () => {
+            showBetaFormBtn.classList.add('hidden');
+            betaForm.classList.remove('hidden');
+            betaForm.classList.add('animate-fadeIn');
+        });
+
+        betaForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('testerEmail').value;
+
+            // Here you would typically send data to your backend
+            console.log('Registering tester:', email);
+
+            const lang = document.documentElement.lang;
+            formStatus.textContent = translations[lang].form_success;
+            formStatus.classList.remove('hidden');
+            betaForm.querySelectorAll('input, button').forEach(el => el.disabled = true);
+            betaForm.querySelector('button[type="submit"]').style.opacity = '0.5';
+        });
 
         // Close on backdrop click
         legalModal.addEventListener('click', (e) => {
