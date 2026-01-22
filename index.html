@@ -258,12 +258,9 @@
                                 oznaczasz przejazd jako służbowy lub prywatny w dogodnym momencie.</p>
                         </div>
                         <div class="lg:w-1/2 relative">
-                            <div
-                                class="screen-container rotate-3 hover:rotate-0 transition-transform duration-500 screen-cycler">
-                                <img src="assets/img/screen_trips.png" class="screen-img active"
-                                    alt="Automatyczne wykrywanie podróży" width="320" height="640" loading="lazy">
-                                <img src="assets/img/screen_edit_trip.png" class="screen-img" alt="Edycja trasy"
-                                    width="320" height="640" loading="lazy">
+                            <div class="screen-container rotate-3 hover:rotate-0 transition-transform duration-500">
+                                <img src="assets/img/screen_edit_trip.png" class="screen-img"
+                                    alt="Edycja trasy w Kilometrik" width="320" height="640" loading="lazy">
                             </div>
                             <div
                                 class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-green-500/5 blur-[100px] rounded-full">
@@ -934,16 +931,6 @@
             formStatus.classList.remove('hidden');
             betaForm.querySelectorAll('input, button').forEach(el => el.disabled = true);
             betaForm.querySelector('button[type="submit"]').style.opacity = '0.5';
-        });
-
-        // Image Cycling Logic
-        const cyclers = document.querySelectorAll('.screen-cycler');
-        cyclers.forEach(cycler => {
-            const imgs = cycler.querySelectorAll('.screen-img');
-            if (imgs.length < 2) return;
-            setInterval(() => {
-                imgs[1].classList.toggle('active');
-            }, 3000);
         });
 
         // Close on backdrop click
