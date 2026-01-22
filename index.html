@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#030712">
     <title>Kilometrik | Automatyczna kilometrówka dla Twojej firmy</title>
     <meta name="description"
         content="Kilometrik - cicha i automatyczna kilometrówka dla firm. Rejestruj trasy w tle, generuj raporty zgodne z US i oszczędzaj czas. Wypróbuj za darmo!">
@@ -32,6 +33,8 @@
     <link rel="preload" href="assets/img/screen_trips.png" as="image" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -210,7 +213,8 @@
                     <div class="lang-option" data-lang="pl">PL</div>
                     <div class="lang-option" data-lang="en">EN</div>
                 </div>
-                <a href="#beta-section" class="btn btn-primary" data-i18n="nav_try_free">Przetestuj</a>
+                <a href="#beta-section" class="btn btn-primary" data-i18n="nav_try_free"
+                    title="Zapisz się na testy beta">Przetestuj</a>
             </div>
         </div>
     </nav>
@@ -226,8 +230,8 @@
                         Kilometrik automatycznie zapisuje Twoje trasy w tle. Bez klikania, bez zapominania. Gotowe
                         zestawienie dla księgowości w zasięgu ręki.</p>
                     <div class="flex flex-wrap gap-6 justify-center">
-                        <a href="#beta-section" class="btn btn-primary text-lg px-10 py-4"
-                            data-i18n="hero_cta_primary">Przetestuj</a>
+                        <a href="#beta-section" class="btn btn-primary text-lg px-10 py-4" data-i18n="hero_cta_primary"
+                            title="Zacznij testować Kilometrik za darmo">Przetestuj</a>
                     </div>
                 </div>
 
@@ -1097,11 +1101,15 @@
         iosBtn.addEventListener('click', () => showComingSoon(iosBtn, 'Coming soon', 'iOS'));
         androidBtn.addEventListener('click', () => showComingSoon(androidBtn, 'Coming soon for now', 'Android'));
 
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true,
-            easing: 'ease-out-expo'
+        // Initialize AOS with a slight delay to prioritize initial render
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                AOS.init({
+                    duration: 1000,
+                    once: true,
+                    easing: 'ease-out-expo'
+                });
+            }, 100);
         });
     </script>
 </body>
