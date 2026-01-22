@@ -940,11 +940,9 @@
         const cyclers = document.querySelectorAll('.screen-cycler');
         cyclers.forEach(cycler => {
             const imgs = cycler.querySelectorAll('.screen-img');
-            let current = 0;
+            if (imgs.length < 2) return;
             setInterval(() => {
-                imgs[current].classList.remove('active');
-                current = (current + 1) % imgs.length;
-                imgs[current].classList.add('active');
+                imgs[1].classList.toggle('active');
             }, 3000);
         });
 
