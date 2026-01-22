@@ -429,3 +429,22 @@ input[type="checkbox"] {
 input::placeholder {
     color: #4B5563;
 }
+
+/* Screen Image Cycler */
+.screen-cycler {
+    position: relative;
+    overflow: hidden;
+}
+
+.screen-cycler .screen-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.screen-cycler .screen-img.active {
+    position: relative;
+    opacity: 1;
+}
