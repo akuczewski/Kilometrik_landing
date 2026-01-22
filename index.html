@@ -922,18 +922,41 @@
         showBetaFormBtn.addEventListener('mouseenter', revealForm);
         showBetaFormBtn.addEventListener('click', revealForm);
 
-        betaForm.addEventListener('submit', (e) => {
+        betaForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('testerEmail').value;
-
-            // Here you would typically send data to your backend
-            console.log('Registering tester:', email);
-
+            const submitBtn = betaForm.querySelector('button[type="submit"]');
             const lang = document.documentElement.lang;
-            formStatus.textContent = translations[lang].form_success;
-            formStatus.classList.remove('hidden');
+
+            // Disable form
             betaForm.querySelectorAll('input, button').forEach(el => el.disabled = true);
-            betaForm.querySelector('button[type="submit"]').style.opacity = '0.5';
+            submitBtn.style.opacity = '0.5';
+            submitBtn.textContent = lang === 'pl' ? 'Wysyłanie...' : 'Sending...';
+
+            try {
+                // REPLACE THIS URL with your Google Apps Script Web App URL
+                const SCRIPT_URL = 'TUTAJ_WKLEJ_SWOJ_URL_Z_APPS_SCRIPT';
+
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Apps Script requires no-cors for simple posts
+                    cache: 'no-cache',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
+
+                formStatus.textContent = translations[lang].form_success;
+                formStatus.classList.remove('hidden');
+                formStatus.style.color = '#4ade80';
+            } catch (error) {
+                console.error('Error!', error.message);
+                formStatus.textContent = lang === 'pl' ? 'Wystąpił błąd. Spróbuj ponownie później.' : 'An error occurred. Please try again later.';
+                formStatus.classList.remove('hidden');
+                formStatus.style.color = '#ef4444';
+                betaForm.querySelectorAll('input, button').forEach(el => el.disabled = false);
+                submitBtn.style.opacity = '1';
+                submitBtn.textContent = translations[lang].form_submit;
+            }
         });
 
         // Close on backdrop click
