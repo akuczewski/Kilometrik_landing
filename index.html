@@ -971,6 +971,7 @@
         const showBetaFormBtn = document.getElementById('showBetaForm');
         const betaForm = document.getElementById('betaForm');
         const formStatus = document.getElementById('formStatus');
+        let lastTesterEmail = '';
 
         const revealForm = () => {
             showBetaFormBtn.classList.add('hidden');
@@ -981,9 +982,12 @@
         showBetaFormBtn.addEventListener('mouseenter', revealForm);
         showBetaFormBtn.addEventListener('click', revealForm);
 
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUbMqtmVnG4JzHOrWyMN2Pl8o1LmDJ50NvKJwrWufLVHPls03btSUgPcujuMllyEzP/exec';
+
         betaForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('testerEmail').value;
+            lastTesterEmail = email; // Store for platform tracking
             const submitBtn = betaForm.querySelector('button[type="submit"]');
             const lang = document.documentElement.lang;
 
@@ -993,9 +997,6 @@
             submitBtn.textContent = lang === 'pl' ? 'Wysyłanie...' : 'Sending...';
 
             try {
-                // REPLACE THIS URL with your Google Apps Script Web App URL
-                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUbMqtmVnG4JzHOrWyMN2Pl8o1LmDJ50NvKJwrWufLVHPls03btSUgPcujuMllyEzP/exec';
-
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -1047,23 +1048,46 @@
             if (e.target === downloadModal) closeDownloadModal();
         });
 
-        // Download status feedback
+        // Download status feedback & Platform tracking
         const iosBtn = document.getElementById('downloadIos');
         const androidBtn = document.getElementById('downloadAndroid');
 
-        const showComingSoon = (btn, text) => {
+        async function trackPlatform(platform) {
+            if (!lastTesterEmail) return;
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    cache: 'no-cache',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: lastTesterEmail,
+                        action: 'updatePlatform',
+                        platform: platform
+                    })
+                });
+            } catch (e) {
+                console.warn('Could not track platform', e);
+            }
+        }
+
+        const showComingSoon = (btn, text, platform) => {
             const label = btn.querySelector('.btn-label');
             const originalText = label.textContent;
             label.textContent = text;
             label.style.color = '#A2B089';
+
+            trackPlatform(platform);
+
             setTimeout(() => {
                 label.textContent = originalText;
                 label.style.color = '';
             }, 2000);
         };
 
-        iosBtn.addEventListener('click', () => showComingSoon(iosBtn, 'Coming soon'));
-        androidBtn.addEventListener('click', () => showComingSoon(androidBtn, 'Coming soon for now'));
+        iosBtn.addEventListener('click', () => showComingSoon(iosBtn, 'Coming soon', 'iOS'));
+        androidBtn.addEventListener('click', () => showComingSoon(androidBtn, 'Coming soon for now', 'Android'));
 
         // Initialize AOS
         AOS.init({
