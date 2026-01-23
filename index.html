@@ -537,7 +537,7 @@
             </p>
             <div class="flex flex-col items-center max-w-lg mx-auto mb-16">
                 <!-- Initial Button -->
-                <button id="showBetaForm" class="btn btn-primary text-xl px-12 py-5" data-i18n="nav_try_free">
+                <button id="showBetaForm" class="btn btn-primary text-xl px-12 py-5" data-i18n="form_open_btn">
                     Przetestuj
                 </button>
 
@@ -718,13 +718,14 @@
                 trust_feat2: "Automatyczne wyliczanie stawek",
                 trust_feat3: "Ewidencja przebiegu pojazdu w zasięgu ręki",
 
-                footer_cta: "Szukamy 1000 pionierów",
-                footer_beta_desc: "Budujemy Kilometrik z myślą o Tobie, dlatego potrzebujemy Twojej szczerej opinii. Dołącz do grona pierwszych 1000 użytkowników i przetestuj aplikację zanim trafi do oficjalnej sprzedaży w App Store i Google Play. Pomóż nam wyłapać błędy i powiedz, co możemy zrobić lepiej. W podziękowaniu, w dniu oficjalnej premiery otrzymasz od nas stały rabat -50% na plan PRO.",
+                footer_cta: "Szukamy 100 pionierów",
+                footer_beta_desc: "Budujemy Kilometrik z myślą o Tobie, dlatego potrzebujemy Twojej szczerej opinii. Dołącz do grona pierwszych 100 użytkowników i przetestuj aplikację zanim trafi do oficjalnej sprzedaży w App Store i Google Play. Pomóż nam wyłapać błędy i powiedz, co możemy zrobić lepiej. W podziękowaniu, w dniu oficjalnej premiery otrzymasz od nas stały rabat -50% na plan PRO.",
                 form_email_placeholder: "Twój adres e-mail",
                 form_consent_rodo: "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu dołączenia do grona użytkowników testowych aplikacji Kilometrik oraz otrzymania zniżki na plan PRO.",
                 form_consent_terms: 'Akceptuję <a href="javascript:void(0)" onclick="openModal(\'terms\')" class="text-green-500/80 hover:text-green-400 underline underline-offset-4">Regulamin</a> oraz <a href="javascript:void(0)" onclick="openModal(\'privacy\')" class="text-green-500/80 hover:text-green-400 underline underline-offset-4">Politykę Prywatności</a>.',
-                form_submit: "Pobierz aplikację",
-                form_success: "Dziękujemy! Sprawdź swoją skrzynkę (również folder SPAM) w ciągu kilku minut.",
+                form_submit: "Dołącz do testów",
+                form_open_btn: "Pobierz aplikację",
+                form_success: "Za chwilę będziesz mógł pobrać aplikację...",
                 footer_copy: "© 2026 Kilometrik. Wszelkie prawa zastrzeżone.",
                 footer_terms: "Regulamin",
                 footer_privacy: "Polityka prywatności",
@@ -1008,8 +1009,12 @@
         const betaForm = document.getElementById('betaForm');
         const formStatus = document.getElementById('formStatus');
         let lastTesterEmail = '';
+        let isFormSubmitted = localStorage.getItem('kil_beta_joined') === 'true';
 
         const revealForm = () => {
+            if (isFormSubmitted) return;
+
+            showBetaFormBtn.classList.add('hidden');
             betaForm.classList.remove('hidden');
             betaForm.classList.add('animate-fadeIn');
 
@@ -1022,8 +1027,16 @@
             }
         };
 
+        const handleButtonClick = () => {
+            if (isFormSubmitted) {
+                openDownloadModal();
+            } else {
+                revealForm();
+            }
+        };
+
         showBetaFormBtn.addEventListener('mouseenter', revealForm);
-        showBetaFormBtn.addEventListener('click', revealForm);
+        showBetaFormBtn.addEventListener('click', handleButtonClick);
 
         // Supabase Integration
         const SUPABASE_URL = 'https://hffnoschanerzvpkuryf.supabase.co';
@@ -1084,8 +1097,17 @@
                 formStatus.classList.remove('hidden');
                 formStatus.style.color = '#4ade80';
 
-                // Open download modal
-                setTimeout(openDownloadModal, 1000);
+                // Success State Logic
+                isFormSubmitted = true;
+                localStorage.setItem('kil_beta_joined', 'true');
+                setTimeout(() => {
+                    // Hide Form
+                    betaForm.classList.add('hidden');
+                    // Show Button logic
+                    showBetaFormBtn.classList.remove('hidden');
+                    // Open Modal
+                    openDownloadModal();
+                }, 1500);
 
                 // GA4 Event: Form Submit (Lead)
                 if (typeof gtag === 'function') {
