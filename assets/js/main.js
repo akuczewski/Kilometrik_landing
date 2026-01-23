@@ -17,7 +17,7 @@ const translations = {
         benefit2_title: "Zgodność z przepisami",
         benefit2_desc: "Dokumenty są generowane w formacie akceptowanym przez polskie urzędy skarbowe i biura rachunkowe.",
         benefit3_title: "Wiele pojazdów",
-        benefit3_desc: "Zarządzaj jedną floty lub wieloma samochodami w ramach jednego konta.",
+        benefit3_desc: "Zarządzaj jednym lub wieloma samochodami w ramach jednego konta.",
         benefit4_title: "Działa w tle",
         benefit4_desc: "Aplikacja nie wymaga Twojej uwagi podczas jazdy. Oszczędza czas i baterię.",
         pricing_title: "Proste zasady",
@@ -38,7 +38,7 @@ const translations = {
         footer_copy: "© 2026 Kilometrik. Wszelkie prawa zastrzeżone.",
         footer_terms: "Regulamin",
         footer_privacy: "Polityka prywatności",
-        footer_powered: "Strona stworzona przez",
+        footer_powered: "Aplikacja stworzona przez",
         terms_html: `
             <h1>Regulamin świadczenia usług</h1>
             <div class="space-y-6 text-slate-300">
@@ -133,7 +133,7 @@ const translations = {
         footer_copy: "© 2026 Kilometrik. All rights reserved.",
         footer_terms: "Terms of Service",
         footer_privacy: "Privacy Policy",
-        footer_powered: "Powered by",
+        footer_powered: "Created by",
         terms_html: `
             <h1>Terms of Service</h1>
             <div class="space-y-6 text-slate-300">
