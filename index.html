@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="theme-color" content="#030712">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kilometrik | Automatyczna kilometrówka dla Twojej firmy</title>
+    <meta name="theme-color" content="#030712">
     <meta name="description"
         content="Kilometrik - cicha i automatyczna kilometrówka dla firm. Rejestruj trasy w tle, generuj raporty zgodne z US i oszczędzaj czas. Wypróbuj za darmo!">
     <meta name="keywords"
@@ -17,7 +17,7 @@
     <meta property="og:title" content="Kilometrik | Automatyczna kilometrówka dla Twojej firmy">
     <meta property="og:description"
         content="Automatyczne śledzenie tras w tle. Generuj raporty zgodne z US jednym kliknięciem.">
-    <meta property="og:image" content="https://kilometrik.pl/og-image.webp">
+    <meta property="og:image" content="https://kilometrik.pl/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -25,28 +25,23 @@
     <meta property="twitter:title" content="Kilometrik | Automatyczna kilometrówka dla Twojej firmy">
     <meta property="twitter:description"
         content="Automatyczne śledzenie tras w tle. Generuj raporty zgodne z US jednym kliknięciem.">
-    <meta property="twitter:image" content="https://kilometrik.pl/og-image.webp">
+    <meta property="twitter:image" content="https://kilometrik.pl/og-image.png">
 
     <link rel="canonical" href="https://kilometrik.pl/">
 
-    <!-- Preload Critical Assets -->
-    <link rel="preload" href="assets/img/screen_trips.webp" as="image" fetchpriority="high">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.umd.min.js" defer></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://unpkg.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.umd.min.js" defer></script>
-    <link rel="stylesheet" href="assets/css/main.min.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Outfit', sans-serif;
-            background: #030712;
-            /* Fallback background for faster FCP */
         }
 
         [data-i18n] {
@@ -202,8 +197,7 @@
     <nav id="mainNav">
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="assets/img/logo.webp" alt="Kilometrik Logo" class="h-10 w-auto" width="40" height="40"
-                    decoding="async">
+                <img src="assets/img/logo.webp" alt="Kilometrik Logo" class="h-10 w-auto" width="40" height="40">
                 <span class="logo-text">Kilometrik</span>
             </a>
             <div class="nav-links">
@@ -212,8 +206,7 @@
                     <div class="lang-option" data-lang="pl">PL</div>
                     <div class="lang-option" data-lang="en">EN</div>
                 </div>
-                <a href="#beta-section" class="btn btn-primary" data-i18n="nav_try_free"
-                    title="Zapisz się na testy beta">Przetestuj</a>
+                <a href="#beta-section" class="btn btn-primary" data-i18n="nav_try_free">Przetestuj</a>
             </div>
         </div>
     </nav>
@@ -229,8 +222,8 @@
                         Kilometrik automatycznie zapisuje Twoje trasy w tle. Bez klikania, bez zapominania. Gotowe
                         zestawienie dla księgowości w zasięgu ręki.</p>
                     <div class="flex flex-wrap gap-6 justify-center">
-                        <a href="#beta-section" class="btn btn-primary text-lg px-10 py-4" data-i18n="hero_cta_primary"
-                            title="Zacznij testować Kilometrik za darmo">Przetestuj</a>
+                        <a href="#beta-section" class="btn btn-primary text-lg px-10 py-4"
+                            data-i18n="hero_cta_primary">Przetestuj</a>
                     </div>
                 </div>
 
@@ -240,21 +233,21 @@
                         <div class="col-span-4 rotate-[-10deg] translate-x-12 opacity-40 blur-sm hidden lg:block">
                             <div class="screen-container">
                                 <img src="assets/img/screen_reports_new.webp" class="screen-img"
-                                    alt="Raporty Kilometrik" width="320" height="640" decoding="async">
+                                    alt="Raporty Kilometrik" width="472" height="1024" loading="lazy">
                             </div>
                         </div>
                         <!-- Center Screen (Main) -->
                         <div class="col-span-12 lg:col-span-4 z-10 lg:scale-110">
                             <div class="screen-container border-green-500/20 shadow-green-500/10">
                                 <img src="assets/img/screen_trips.webp" class="screen-img" alt="Główny widok tras"
-                                    width="320" height="640" fetchpriority="high" decoding="async">
+                                    width="472" height="1024" fetchpriority="high">
                             </div>
                         </div>
                         <!-- Right Side Screen -->
                         <div class="col-span-4 rotate-[10deg] -translate-x-12 opacity-40 blur-sm hidden lg:block">
                             <div class="screen-container">
                                 <img src="assets/img/screen_fleet.webp" class="screen-img" alt="Zarządzanie flotą"
-                                    width="320" height="640" decoding="async">
+                                    width="505" height="1024" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -282,8 +275,7 @@
                         <div class="lg:w-1/2 relative">
                             <div class="screen-container rotate-3 hover:rotate-0 transition-transform duration-500">
                                 <img src="assets/img/screen_edit_trip.webp" class="screen-img"
-                                    alt="Edycja trasy w Kilometrik" width="320" height="640" loading="lazy"
-                                    decoding="async">
+                                    alt="Edycja trasy w Kilometrik" width="472" height="1024" loading="lazy">
                             </div>
                             <div
                                 class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-green-500/5 blur-[100px] rounded-full">
@@ -303,7 +295,7 @@
                         <div class="lg:w-1/2 relative">
                             <div class="screen-container -rotate-3 hover:rotate-0 transition-transform duration-500">
                                 <img src="assets/img/screen_fleet.webp" class="screen-img" alt="Panel Twoja Flota"
-                                    width="320" height="640" loading="lazy" decoding="async">
+                                    width="505" height="1024" loading="lazy">
                             </div>
                             <div
                                 class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/5 blur-[100px] rounded-full">
@@ -323,7 +315,7 @@
                         <div class="lg:w-1/2 relative">
                             <div class="screen-container rotate-2 hover:rotate-0 transition-transform duration-500">
                                 <img src="assets/img/screen_reports_new.webp" class="screen-img"
-                                    alt="Eksport raportów PDF" width="320" height="640" loading="lazy" decoding="async">
+                                    alt="Eksport raportów PDF" width="472" height="1024" loading="lazy">
                             </div>
                             <div
                                 class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-500/5 blur-[100px] rounded-full">
@@ -509,7 +501,7 @@
                                 class="bg-white p-3 rounded-xl shadow-2xl transform rotate-2 group-hover:rotate-0 transition-transform duration-700 overflow-hidden max-w-[300px] mx-auto border-8 border-slate-800/10">
                                 <img src="assets/img/report_sample.webp"
                                     alt="Widok wygenerowanej ewidencji przebiegu pojazdu"
-                                    class="w-full h-auto shadow-inner" width="300" height="424" loading="lazy">
+                                    class="w-full h-auto shadow-inner" width="785" height="1024" loading="lazy">
                             </div>
                             <!-- Background Glow -->
                             <div
@@ -591,7 +583,7 @@
             <p class="text-sm opacity-40" data-i18n="footer_copy">© 2026 Kilometrik. Wszelkie prawa zastrzeżone.</p>
             <p class="text-xs opacity-30 mt-4">
                 <span data-i18n="footer_powered">Powered by</span>
-                <a href="https://greatskill.pl" target="_blank"
+                <a href="https://greatskill.pl" target="_blank" rel="noopener noreferrer"
                     class="hover:text-white transition-colors underline decoration-slate-600 underline-offset-4">GreatSkill</a>
             </p>
         </div>
@@ -600,7 +592,7 @@
     <!-- Legal Modal -->
     <div id="legalModal" class="modal">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()">✕</span>
+            <span class="modal-close" onclick="closeModal()" aria-label="Zamknij" role="button" tabindex="0">✕</span>
             <div id="modalBody" class="modal-body">
                 <!-- Content loaded dynamically -->
             </div>
@@ -610,7 +602,8 @@
     <!-- Download Modal -->
     <div id="downloadModal" class="modal">
         <div class="modal-content !max-w-3xl">
-            <span class="modal-close" onclick="closeDownloadModal()">✕</span>
+            <span class="modal-close" onclick="closeDownloadModal()" aria-label="Zamknij" role="button"
+                tabindex="0">✕</span>
             <div class="p-8 md:p-12">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tighter" data-i18n="download_title">Gotowe!
@@ -625,8 +618,7 @@
                         class="download-btn-drawer p-8 rounded-3xl flex items-center gap-6 group">
                         <div
                             class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                            <img src="assets/img/logo_apple.webp" alt="TestFlight" class="w-10 h-10 object-contain"
-                                decoding="async" width="40" height="40">
+                            <img src="assets/img/logo_apple.webp" alt="TestFlight" class="w-10 h-10 object-contain">
                         </div>
                         <div class="text-left">
                             <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-0.5">Zapisz się do
@@ -640,8 +632,7 @@
                         class="download-btn-drawer p-8 rounded-3xl flex items-center gap-6 group">
                         <div
                             class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                            <img src="assets/img/logo_android.webp" alt="Google Play" class="w-10 h-10 object-contain"
-                                decoding="async" width="40" height="40">
+                            <img src="assets/img/logo_android.webp" alt="Google Play" class="w-10 h-10 object-contain">
                         </div>
                         <div class="text-left">
                             <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-0.5">Pobierz plik
@@ -1100,15 +1091,11 @@
         iosBtn.addEventListener('click', () => showComingSoon(iosBtn, 'Coming soon', 'iOS'));
         androidBtn.addEventListener('click', () => showComingSoon(androidBtn, 'Coming soon for now', 'Android'));
 
-        // Initialize AOS with a slight delay to prioritize initial render
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                AOS.init({
-                    duration: 1000,
-                    once: true,
-                    easing: 'ease-out-expo'
-                });
-            }, 100);
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-expo'
         });
     </script>
 </body>

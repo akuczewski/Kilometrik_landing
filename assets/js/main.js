@@ -277,10 +277,15 @@ window.closeModal = function () {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({
-        duration: 800,
-        once: true,
-        offset: 100
-    });
     updateContent('pl');
+});
+
+window.addEventListener('load', () => {
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    }
 });
