@@ -2,6 +2,16 @@
 <html lang="pl">
 
 <head>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9JQEGKSM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-T9JQEGKSM9');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kilometrik | Automatyczna kilometrówka dla Twojej firmy</title>
@@ -13,21 +23,21 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kilometrik.pl/">
+    <meta property="og:url" content="https://kilometrik.app/">
     <meta property="og:title" content="Kilometrik | Automatyczna kilometrówka dla Twojej firmy">
     <meta property="og:description"
         content="Automatyczne śledzenie tras w tle. Generuj raporty zgodne z US jednym kliknięciem.">
-    <meta property="og:image" content="https://kilometrik.pl/og-image.png">
+    <meta property="og:image" content="https://kilometrik.app/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kilometrik.pl/">
+    <meta property="twitter:url" content="https://kilometrik.app/">
     <meta property="twitter:title" content="Kilometrik | Automatyczna kilometrówka dla Twojej firmy">
     <meta property="twitter:description"
         content="Automatyczne śledzenie tras w tle. Generuj raporty zgodne z US jednym kliknięciem.">
-    <meta property="twitter:image" content="https://kilometrik.pl/og-image.png">
+    <meta property="twitter:image" content="https://kilometrik.app/og-image.png">
 
-    <link rel="canonical" href="https://kilometrik.pl/">
+    <link rel="canonical" href="https://kilometrik.app/">
 
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1000,9 +1010,16 @@
         let lastTesterEmail = '';
 
         const revealForm = () => {
-            showBetaFormBtn.classList.add('hidden');
             betaForm.classList.remove('hidden');
             betaForm.classList.add('animate-fadeIn');
+
+            // GA4 Event: Form Open
+            if (typeof gtag === 'function') {
+                gtag('event', 'form_open', {
+                    'event_category': 'Engagement',
+                    'event_label': 'Beta Signup Form'
+                });
+            }
         };
 
         showBetaFormBtn.addEventListener('mouseenter', revealForm);
@@ -1069,6 +1086,15 @@
 
                 // Open download modal
                 setTimeout(openDownloadModal, 1000);
+
+                // GA4 Event: Form Submit (Lead)
+                if (typeof gtag === 'function') {
+                    gtag('event', 'generate_lead', {
+                        'event_category': 'Growth',
+                        'event_label': 'Beta Signup Success'
+                    });
+                }
+
             } catch (error) {
                 console.error('Error!', error.message);
                 formStatus.textContent = lang === 'pl' ? 'Wystąpił błąd. Spróbuj ponownie później.' : 'An error occurred. Please try again later.';
@@ -1132,7 +1158,19 @@
             label.textContent = text;
             label.style.color = '#A2B089';
 
+            label.style.color = '#A2B089';
+
             trackPlatform(platform);
+
+            // GA4 Event: App Download Attempt
+            if (typeof gtag === 'function') {
+                gtag('event', 'app_download', {
+                    'event_category': 'Conversion',
+                    'event_label': platform,
+                    'platform': platform
+                });
+            }
+
 
             setTimeout(() => {
                 label.textContent = originalText;

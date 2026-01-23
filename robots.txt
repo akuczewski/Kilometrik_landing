@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kilometrik.pl/sitemap.xml
+Sitemap: https://kilometrik.app/sitemap.xml
