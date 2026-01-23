@@ -987,6 +987,31 @@
         showBetaFormBtn.addEventListener('mouseenter', revealForm);
         showBetaFormBtn.addEventListener('click', revealForm);
 
+        // Supabase Integration
+        const SUPABASE_URL = 'https://hffnoschanerzvpkuryf.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhmZm5vc2NoYW5lcnp2cGt1cnlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MDk1MDQsImV4cCI6MjA4NDM4NTUwNH0.X4LAQF9T8D7fccmvzshwm5iNTaui0mtxk3bhpdFFbDo';
+
+        async function registerBetaTester(email) {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/beta_testers`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({ email: email, source: 'landing_page' })
+                });
+
+                if (response.ok) {
+                    console.log('Użytkownik pomyślnie dodany do bazy testów.');
+                }
+            } catch (err) {
+                console.error('Błąd automatyzacji Supabase:', err);
+            }
+        }
+
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7TtF1fIrYAEgNmdrLXFhMt3avBKzNK-mR-HMgXJ5_TzdxEsJKvpxc_eLoabNRqp7D/exec';
 
         betaForm.addEventListener('submit', async (e) => {
@@ -1013,6 +1038,9 @@
                         timestamp: new Date().toISOString()
                     })
                 });
+
+                // Send to Supabase (Non-blocking or awaited, depending on preference. Awaiting safely since it catches errors)
+                await registerBetaTester(email);
 
                 formStatus.textContent = translations[lang].form_success;
                 formStatus.classList.remove('hidden');
