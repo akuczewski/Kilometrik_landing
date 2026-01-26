@@ -628,8 +628,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                     <!-- iOS -->
-                    <a href="javascript:void(0)" id="downloadIos"
-                        class="download-btn-drawer p-8 rounded-3xl flex items-center gap-6 group">
+                    <a href="https://testflight.apple.com/join/UNsjEm5u" target="_blank" rel="noopener noreferrer"
+                        id="downloadIos" class="download-btn-drawer p-8 rounded-3xl flex items-center gap-6 group">
                         <div
                             class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-white/10 transition-colors">
                             <img src="assets/img/logo_apple.webp" alt="TestFlight" class="w-10 h-10 object-contain">
@@ -1175,17 +1175,8 @@
             }
         }
 
-        const showComingSoon = (btn, text, platform) => {
-            const label = btn.querySelector('.btn-label');
-            const originalText = label.textContent;
-            label.textContent = text;
-            label.style.color = '#A2B089';
-
-            label.style.color = '#A2B089';
-
+        const trackDownload = (platform) => {
             trackPlatform(platform);
-
-            // GA4 Event: App Download Attempt
             if (typeof gtag === 'function') {
                 gtag('event', 'app_download', {
                     'event_category': 'Conversion',
@@ -1193,15 +1184,10 @@
                     'platform': platform
                 });
             }
-
-
-            setTimeout(() => {
-                label.textContent = originalText;
-                label.style.color = '';
-            }, 2000);
         };
 
-        iosBtn.addEventListener('click', () => showComingSoon(iosBtn, 'Coming soon', 'iOS'));
+        iosBtn.addEventListener('click', () => trackDownload('iOS'));
+        androidBtn.addEventListener('click', () => trackDownload('Android'));
 
 
         // Initialize AOS
