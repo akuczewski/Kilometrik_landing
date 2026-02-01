@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9JQEGKSM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-T9JQEGKSM9');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Wiedza | Kilometrik</title>
+    <meta name="theme-color" content="#030712">
+    <meta name="description"
+        content="Baza wiedzy o automatycznej ewidencji przebiegu pojazdu, kilometrówce i optymalizacji kosztów w firmie.">
+
+    <link rel="canonical" href="https://kilometrik.app/blog/">
+
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #030712;
+            color: #F9FAFB;
+        }
+
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 50% -20%, #111827 0%, #030712 100%);
+        }
+
+        /* Custom tweaks for blog grid */
+        .article-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(34, 197, 94, 0.3);
+            background-color: rgba(34, 197, 94, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-mesh"></div>
+    <nav id="mainNav" class="border-b border-slate-900/50 backdrop-blur-md">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../assets/img/logo.webp" alt="Kilometrik Logo" class="h-10 w-auto" width="40" height="40">
+                <span class="logo-text">Kilometrik</span>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html"
+                    class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Strona Główna</a>
+                <a href="../index.html#beta-section" class="btn btn-primary">Przetestuj</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24">
+        <div class="container">
+            <header class="text-center mb-24 max-w-3xl mx-auto" data-aos="fade-up">
+                <div
+                    class="inline-block px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-slate-300 font-bold text-xs tracking-widest uppercase mb-6">
+                    Baza Wiedzy
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter">
+                    Ewidencja <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">Przyszłości</span>
+                </h1>
+                <p class="text-xl text-slate-400 leading-relaxed">
+                    Artykuły, poradniki i analizy eksperckie na temat automatyzacji kilometrówki, optymalizacji
+                    podatkowej i technologii GPS.
+                </p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Article 1 -->
+                <a href="najlepsze-aplikacje-kilometrowki-europa-2026.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-green-500 uppercase tracking-wider">Ranking</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-green-400 transition-colors">Najlepsze aplikacje
+                        do kilometrówki w Europie (2026)</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Szukasz aplikacji do automatycznego śledzenia
+                        kilometrówki? Sprawdzamy MileIQ, Driversnote, TripLog i Kilometrik.</p>
+                    <div class="flex items-center text-green-500 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Article 2 -->
+                <a href="alternatywy-mileiq-freelancerzy.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up" data-aos-delay="50">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-blue-500 uppercase tracking-wider">Alternatywy</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-blue-400 transition-colors">Alternatywy dla
+                        MileIQ dla freelancerów</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">MileIQ jest popularne, ale czy najlepsze w
+                        Europie? Poznaj alternatywy lepiej dopasowane do lokalnych przepisów.</p>
+                    <div class="flex items-center text-blue-500 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Article 3 -->
+                <a href="jak-prowadzic-kilometrowke-automatycznie.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-purple-500 uppercase tracking-wider">Poradnik</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-purple-400 transition-colors">Jak automatycznie
+                        prowadzić kilometrówkę</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Ręczne wpisywanie tras to przeszłość. Dowiedz
+                        się, jak działa automatyczne wykrywanie jazdy w tle.</p>
+                    <div class="flex items-center text-purple-500 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Article 4 -->
+                <a href="najlepsza-kilometrowka-freelancerzy-polska.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-red-500 uppercase tracking-wider">Lokalne</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-red-400 transition-colors">Najlepsza aplikacja
+                        dla freelancerów w Polsce</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Specyfika polskiego rynku wymaga odpowiednich
+                        narzędzi. Zobacz co wybrać prowadząc JDG w Polsce.</p>
+                    <div class="flex items-center text-red-500 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Article 5 -->
+                <a href="automatyczna-vs-reczna-kilometrowka.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up" data-aos-delay="50">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-orange-500 uppercase tracking-wider">Porównanie</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-orange-400 transition-colors">Automatyczna vs
+                        ręczna kilometrówka</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Notes i długopis czy aplikacja w tle?
+                        Porównujemy wady i zalety obu rozwiązań.</p>
+                    <div class="flex items-center text-orange-500 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Article 6 -->
+                <a href="jak-przygotowac-raport-kilometrowki.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-cyan-500 uppercase tracking-wider">Produktywność</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-cyan-400 transition-colors">Jak przygotować
+                        raport kilometrówki w 3 minuty</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Księgowa czeka na raport? Zobacz jak
+                        wygenerować go w 3 kliknięcia i mieć spokój na miesiąc.</p>
+                    <div class="flex items-center text-cyan-500 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Article 7 -->
+                <a href="najczestsze-bledy-kilometrowka.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-yellow-500 uppercase tracking-wider">Edukacja</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-yellow-400 transition-colors">Najczęstsze błędy
+                        w kilometrówce</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Błędy w kilometrówce mogą kosztować. Sprawdź,
+                        czego unikać, by nie narazić się urzędowi skarbowemu.</p>
+                    <div class="flex items-center text-yellow-500 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Article 8 -->
+                <a href="jak-aplikacje-wykrywaja-jazde.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up" data-aos-delay="50">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-green-600 uppercase tracking-wider">Technologia</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-green-500 transition-colors">Jak aplikacje
+                        wykrywają jazdę samochodem?</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Skąd telefon wie, że jedziesz autem, a nie
+                        rowerem? Kulisy technologii wykrywania ruchu.</p>
+                    <div class="flex items-center text-green-600 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Article 9 -->
+                <a href="najlepsze-aplikacje-auto-sluzbowe.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-indigo-500 uppercase tracking-wider">Dla Firm</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-indigo-400 transition-colors">Najlepsze
+                        aplikacje do aut służbowych</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Zarządzasz flotą pojazdów? Zobacz, które
+                        aplikacje najlepiej sprawdzają się w środowisku biznesowym.</p>
+                    <div class="flex items-center text-indigo-500 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Article 10 -->
+                <a href="dlaczego-automatyczna-kilometrowka-oszczedza-pieniadze.html"
+                    class="article-card block p-8 rounded-2xl bg-slate-950/50 border border-slate-900 group"
+                    data-aos="fade-up">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span class="text-xs font-bold text-emerald-500 uppercase tracking-wider">Finanse</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 group-hover:text-emerald-400 transition-colors">Dlaczego
+                        automatyczna kilometrówka oszczędza pieniądze?</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Nie zapisujesz krótkich przejazdów? Tracisz
+                        realne pieniądze. Policzyliśmy to dla Ciebie.</p>
+                    <div class="flex items-center text-emerald-500 text-sm font-bold">
+                        Czytaj dalej <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-12 border-t border-slate-900 text-center text-slate-500 text-sm">
+        <div class="container">
+            <p>© 2026 Kilometrik. Wszelkie prawa zastrzeżone.</p>
+            <div class="mt-4 space-x-4">
+                <a href="../index.html" class="hover:text-white transition-colors">Strona Główna</a>
+                <span class="opacity-20">|</span>
+                <a href="../terms.html" class="hover:text-white transition-colors">Regulamin</a>
+                <span class="opacity-20">|</span>
+                <a href="../privacy.html" class="hover:text-white transition-colors">Prywatność</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-expo'
+        });
+    </script>
+</body>
+
+</html>
