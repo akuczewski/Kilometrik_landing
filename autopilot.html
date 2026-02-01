@@ -61,7 +61,8 @@
 
         @media (max-width: 768px) {
             .timeline-line {
-                left: 20px;
+                left: 31px;
+                /* Center of the 64px (w-16) or similar? No w-8 is 32px. Center is 16px offset + 16px half = 32px. Let's try 31px to look chemically perfect. */
             }
         }
     </style>
@@ -170,7 +171,7 @@
 
                     <!-- Step 1 -->
                     <div class="relative flex flex-col md:flex-row items-center gap-10 group" data-aos="fade-right">
-                        <div class="md:w-1/2 text-right md:pr-12 md:order-1 order-2">
+                        <div class="md:w-1/2 pl-20 md:pl-0 text-left md:text-right md:pr-12 md:order-1 order-2">
                             <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-green-400 transition-colors">
                                 1. Start analizy</h3>
                             <p class="text-slate-400 leading-relaxed">System budzi się, gdy wykryje stabilny ruch o
@@ -192,7 +193,7 @@
                         <div
                             class="absolute left-4 md:left-1/2 w-8 h-8 -ml-4 rounded-full border-4 border-[#030712] bg-slate-700 group-hover:bg-green-500 transition-colors z-10">
                         </div>
-                        <div class="md:w-1/2 md:pl-12">
+                        <div class="md:w-1/2 pl-20 md:pl-12">
                             <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-green-400 transition-colors">
                                 2. Potwierdzenie jazdy</h3>
                             <p class="text-slate-400 leading-relaxed">Nie zapisujemy od razu. Czekamy na "dowody":
@@ -203,7 +204,7 @@
 
                     <!-- Step 3 -->
                     <div class="relative flex flex-col md:flex-row items-center gap-10 group" data-aos="fade-right">
-                        <div class="md:w-1/2 text-right md:pr-12 md:order-1 order-2">
+                        <div class="md:w-1/2 pl-20 md:pl-0 text-left md:text-right md:pr-12 md:order-1 order-2">
                             <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-green-400 transition-colors">
                                 3. Filtrowanie błędów</h3>
                             <p class="text-slate-400 leading-relaxed">Inteligentny filtr odrzuca "skoki" GPS (np. w
@@ -225,7 +226,7 @@
                         <div
                             class="absolute left-4 md:left-1/2 w-8 h-8 -ml-4 rounded-full border-4 border-[#030712] bg-slate-700 group-hover:bg-green-500 transition-colors z-10">
                         </div>
-                        <div class="md:w-1/2 md:pl-12">
+                        <div class="md:w-1/2 pl-20 md:pl-12">
                             <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-green-400 transition-colors">
                                 4. Inteligentny Stop</h3>
                             <p class="text-slate-400 leading-relaxed">Korek czy światła to nie koniec trasy. Autopilot
@@ -235,7 +236,7 @@
 
                     <!-- Step 5 -->
                     <div class="relative flex flex-col md:flex-row items-center gap-10 group" data-aos="fade-right">
-                        <div class="md:w-1/2 text-right md:pr-12 md:order-1 order-2">
+                        <div class="md:w-1/2 pl-20 md:pl-0 text-left md:text-right md:pr-12 md:order-1 order-2">
                             <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-green-400 transition-colors">
                                 5. Werdykt</h3>
                             <p class="text-slate-400 leading-relaxed">Po zatrzymaniu system ocenia całość: Dystans OK?
